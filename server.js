@@ -4,6 +4,7 @@ let mongo = require('mongodb');
 const urlLocal = 'mongodb://localhost:27017/mongo';
 const urlRemote = 'mongodb://milesxu:hM73DseS17pu@ds062339.mlab.com:62339/mongo';
 const localhost = 'http://localhost:8080/';
+const remoteHost = 'https://shorurl-milesxu.herokuapp.com/';
 let app = express();
 
 async function getShortUrl(params) {
@@ -86,7 +87,7 @@ app.use((req, res, next) => {
                 if (!(result instanceof mongo.MongoError)) {
                     res.json({
                         original_url: url,
-                        short_url: localhost + result.short
+                        short_url: remoteHost + result.short
                     });
                 } else
                     res.json({
@@ -104,7 +105,7 @@ app.use((req, res, next) => {
                     else {
                         /*res.json({
                             original_url: result.url,
-                            short_url: localhost + short
+                            short_url: remoteHost + short
                         });*/
                         res.redirect(result.url);
                     }
